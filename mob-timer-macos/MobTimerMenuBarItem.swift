@@ -1,29 +1,24 @@
-//
-//  MacExtrasConfigurator.swift
-//  mob-timer-macos
-//
-//  Created by Jochen Christ on 24.10.21.
-//
-
 import Foundation
 import AppKit
 
 class MobTimerMenuBarItem: NSObject {
     
-    private var statusItem: NSStatusItem
-    private var mobTimer: MobTimer
-    
+    var settings: UserSettings
+    var mobTimer: MobTimer
+    var statusItem: NSStatusItem
+        
     override init() {
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        mobTimer = MobTimer()
+        self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        self.settings = UserSettings()
+        self.mobTimer = MobTimer(settings: self.settings)
         super.init()
         buildMenu()
-        mobTimer.subscribe() { (result) -> () in
-            self.updateTitle(text: result)
+        updateTitle() 
+        mobTimer.statusDidChangeAction = {[weak self] in
+            self?.updateTitle()
         }
     }
-    
-    
+        
     private func buildMenu() {
         if let statusBarButton = statusItem.button {
             statusBarButton.image = NSImage(
@@ -41,14 +36,9 @@ class MobTimerMenuBarItem: NSObject {
             startTimerItem.target = self
             startTimerItem.action = #selector(Self.startTimer)
             mainMenu.addItem(startTimerItem)
-            
-            
-            let connectionStatusItem = NSMenuItem()
-            connectionStatusItem.title = "Status"
-            mainMenu.addItem(connectionStatusItem)
 
             let preferencesItem = NSMenuItem()
-            preferencesItem.title = "Preferences"
+            preferencesItem.title = "Preferences..."
             preferencesItem.action = #selector(Self.showPreferences)
             preferencesItem.target = self
             mainMenu.addItem(preferencesItem)
@@ -63,18 +53,18 @@ class MobTimerMenuBarItem: NSObject {
             statusItem.menu = mainMenu
         }
     }
-    
-    @objc func updateTitle(text: String) {
-        self.statusItem.button?.title = text
+
+    @objc func updateTitle() {
+        self.statusItem.button?.title = mobTimer.status
     }
-    
+
     @objc private func startTimer() {
         mobTimer.startTimer()
         
     }
     
     @objc private func showPreferences() {
-        let controller = DetailWindowController(rootView: PreferencesView())
+        let controller = DetailWindowController(rootView: PreferencesView(settings: settings))
         controller.window?.title = "Mob Timer";
         controller.showWindow(nil)
         NSApp.activate(ignoringOtherApps: true)

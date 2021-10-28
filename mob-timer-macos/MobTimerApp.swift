@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct mob_timer_macosApp: App {
+struct MobTimerApp: App {
 
     @NSApplicationDelegateAdaptor(AppDelegate.self)
     private var appDelegate

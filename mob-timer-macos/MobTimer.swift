@@ -4,37 +4,89 @@ import EventSource
 
 class MobTimer {
     
+    var settings: UserSettings
     var eventSource: EventSource?
     var currentTimer: Timer?
     
-    var user = "jochen"
+    var status: String = "" {
+        didSet {
+            if status != oldValue {
+                if let action = statusDidChangeAction{
+                    action()
+                }
+            }
+        }
+    }
+    var statusDidChangeAction: (() -> ())?
+
+    init(settings: UserSettings) {
+        self.settings = settings
+        NotificationCenter.default.addObserver(self, selector: #selector(settingChanged(notification:)), name: UserDefaults.didChangeNotification, object: nil)
+        self.connect()
+    }
     
-    init() {
-        let serverURL = URL(string: "https://timer.mob.sh/best/sse2")!
-
-        eventSource = EventSource(url: serverURL)
+    func connect() {
+        guard let url = buildEventsUrl() else {
+            return
+        }
+        print("Connecting to \(url)")
+        eventSource = EventSource(url: url)
         eventSource?.connect()
-
         eventSource?.onComplete { [weak self] statusCode, reconnect, error in
-            print("DISCONNECTED", statusCode ?? "no statusCode")
-            
+            print("Disconnected", statusCode ?? "no statusCode")
             let retryTime = self?.eventSource?.retryTime ?? 3000
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(retryTime)) { [weak self] in
-                print("Retrying now...")
+                print("Retrying now... \(String(describing: self?.eventSource?.url))")
                 self?.eventSource?.connect()
+            }
+        }
+        eventSource?.addEventListener("TIMER_REQUEST") { _, _, data in
+            
+            if let data = data {
+                print(data)
+            }
+            
+            struct TimerRequest: Codable {
+                let timer: Int8
+                let requested: String?
+                let user: String?
+                let nextUser: String?
+                let type: String?
+            }
+            
+            let jsonData = data!.data(using: .utf8)!
+            let timerRequest = try! JSONDecoder().decode(TimerRequest.self, from: jsonData)
+            
+            if let requestedTimer = timerRequest.requested {
+                let timestampTimerEnd = Date.getDateFromString(dateString: requestedTimer)! + 60.0 * Double(timerRequest.timer)
+                self.updateTimer(timeout: timestampTimerEnd, user: timerRequest.user, nextUser: timerRequest.nextUser, type: timerRequest.type)
             }
         }
     }
     
+    @objc func settingChanged(notification: NSNotification) {
+        guard (notification.object as? UserDefaults) != nil else {
+            return
+        }
+        print("User settings have been changed. Reconnecting...")
+        currentTimer?.invalidate()
+        status = ""
+        eventSource?.disconnect()
+        eventSource = nil
+        self.connect()
+    }
+    
     func startTimer() {
-        let url = URL(string: "https://timer.mob.sh/best")!
+        guard let url = buildRoomUrl() else {
+            return
+        }
         
         struct PutTimerRequestBody: Codable {
             let timer: Int8
             let user: String
         }
         
-        let timerRequest = PutTimerRequestBody(timer: 10, user: self.user)
+        let timerRequest = PutTimerRequestBody(timer: 10, user: self.settings.username)
         
         guard let jsonData = try? JSONEncoder().encode(timerRequest) else {
             print("Error: Trying to convert model to JSON data")
@@ -58,37 +110,7 @@ class MobTimer {
         
     }
     
-    func subscribe(completion: @escaping (String)->()) {
-
-        eventSource?.addEventListener("TIMER_REQUEST") { _, _, data in
-            // {"timer":10,"requested":"2021-10-25T14:12:05.997943Z","user":null,"type":"TIMER"}
-            
-            if let data = data {
-                print(data)
-            }
-            
-            struct TimerRequest: Codable {
-                let timer: Int8
-                let requested: String
-                let user: String
-                let type: String
-            }
-            
-            let jsonData = data!.data(using: .utf8)!
-            guard let timerRequest = try? JSONDecoder().decode(TimerRequest.self, from: jsonData) else {
-                print("Error: Trying to convert model to JSON data")
-                return
-            }
-            
-            let timestampTimerEnd = Date.getDateFromString(dateString: timerRequest.requested)! + 60.0 * Double(timerRequest.timer)
-            
-            self.updateTimer(timeout: timestampTimerEnd, typist: timerRequest.user, nextTypist: "jochen", completion: completion)
-        }
-
-        
-    }
-    
-    func updateTimer(timeout: Date, typist: String, nextTypist: String?, completion: @escaping (String)->()) {
+    func updateTimer(timeout: Date, user: String?, nextUser: String? = nil, type: String? = "TIMER") {
                 
         self.currentTimer?.invalidate()
 
@@ -99,25 +121,65 @@ class MobTimer {
             if now >= timeout {
                 print("mob next")
                 timer.invalidate()
-                if let nextTypist = nextTypist {
-                    completion(nextTypist + " is next")
+                if let nextTypist = nextUser {
+                    self.status = nextTypist + " is next"
                 } else {
-                    completion("mob next")
+                    self.status = "mob next"
                 }
             } else {
                 let remainingSeconds = Double(Calendar.current.dateComponents([.second], from: now, to: timeout).second!)
-                completion(self.format(seconds: remainingSeconds, typist: typist))
+                var userString = ""
+                if type == "BREAKTIMER" {
+                    userString = " BREAK"
+                } else if type == "TIMER" {
+                    if let user = user {
+                        userString = " " + user
+                    }
+                }
+                self.status = self.format(seconds: remainingSeconds) + userString
             }
         }
 
     }
 
-    private func format(seconds: TimeInterval, typist: String) -> String {
+    func format(seconds: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.second, .minute]
         formatter.unitsStyle = .positional
-        return formatter.string(from: seconds)! + " " + typist
+        formatter.zeroFormattingBehavior = .pad
+        let formattedString = formatter.string(from: seconds)!
+        return (formattedString.hasPrefix("0") && formattedString.count > 4)  ? String(formattedString.dropFirst()) : formattedString
     }
     
+    func buildRoomUrl() -> URL? {
+        guard !self.settings.server.isEmpty else {
+            status = "Invalid Server"
+            return nil
+        }
+        guard !self.settings.room.isEmpty else {
+            status = "Setup room"
+            return nil
+        }
+        var roomUrl = URL(string: self.settings.server)
+        roomUrl = roomUrl?.appendingPathComponent(self.settings.room)
+        return roomUrl
+    }
+    
+    func buildEventsUrl() -> URL? {
+        guard !self.settings.server.isEmpty else {
+            status = "Invalid Server"
+            return nil
+        }
+        guard !self.settings.room.isEmpty else {
+            status = "Setup room"
+            return nil
+        }
+        var roomUrl = URL(string: self.settings.server)
+        roomUrl = roomUrl?.appendingPathComponent(self.settings.room)
+        roomUrl = roomUrl?.appendingPathComponent("/events")
+        return roomUrl
+    }
+
 }
 
 
@@ -134,5 +196,4 @@ extension Date {
     }
     return date
   }
-
 }
