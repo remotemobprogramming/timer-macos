@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 
 import EventSource
 
@@ -7,6 +8,7 @@ class MobTimer {
     var settings: UserSettings
     var eventSource: EventSource?
     var currentTimer: Timer?
+    var isTimerRunning = false
     
     var status: String = "" {
         didSet {
@@ -82,11 +84,11 @@ class MobTimer {
         }
         
         struct PutTimerRequestBody: Codable {
-            let timer: Int8
+            let timer: Int
             let user: String
         }
         
-        let timerRequest = PutTimerRequestBody(timer: 10, user: self.settings.username)
+        let timerRequest = PutTimerRequestBody(timer: Int(self.settings.interval) ?? 10, user: self.settings.username)
         
         guard let jsonData = try? JSONEncoder().encode(timerRequest) else {
             print("Error: Trying to convert model to JSON data")
@@ -119,15 +121,19 @@ class MobTimer {
             let now = Date()
             
             if now >= timeout {
-                print("mob next")
+                print("next")
+                if (self.isTimerRunning) {
+                    self.timerFinished()
+                }
                 timer.invalidate()
                 if let nextTypist = nextUser {
-                    self.status = nextTypist + " is next"
+                    self.status = "next: " + nextTypist
                 } else {
-                    self.status = "mob next"
+                    self.status = "next"
                 }
             } else {
                 let remainingSeconds = Double(Calendar.current.dateComponents([.second], from: now, to: timeout).second!)
+                self.isTimerRunning = true;
                 var userString = ""
                 if type == "BREAKTIMER" {
                     userString = " BREAK"
@@ -140,6 +146,14 @@ class MobTimer {
             }
         }
 
+    }
+    
+    func timerFinished() {
+        self.isTimerRunning = false
+        if (self.settings.playSound) {
+            print("play sound...")
+            NSSound(named: NSSound.Name("Hero"))?.play()
+        }
     }
 
     func format(seconds: TimeInterval) -> String {

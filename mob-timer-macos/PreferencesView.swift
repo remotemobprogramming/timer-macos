@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct PreferencesView: View {
     
@@ -9,26 +10,38 @@ struct PreferencesView: View {
             HStack {
                 Text("Server:").frame(width: 100, alignment: .topTrailing)
                 TextField("Server", text: $settings.server)
-                    .frame(width: 200)
+                    .frame(width: 220)
                     .disableAutocorrection(true)
             }
             HStack {
                 Text("Room:").frame(width: 100, alignment: .topTrailing)
                 TextField("Room", text: $settings.room)
-                    .frame(width: 200)
+                    .frame(width: 220)
                     .disableAutocorrection(true)
             }
             HStack {
                 Text("Username:").frame(width: 100, alignment: .topTrailing)
                 TextField("Username", text: $settings.username)
-                    .frame(width: 200)
+                    .frame(width: 220)
                     .disableAutocorrection(true)
             }
             HStack {
                 Text("Interval:").frame(width: 100, alignment: .topTrailing)
                 TextField("Interval", text: $settings.interval)
-                    .frame(width: 200)
+                    .frame(width: 220)
                     .disableAutocorrection(true)
+                    .onReceive(Just(settings.interval)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.settings.interval = filtered
+                        }
+                    }
+            }
+            HStack {
+                Text("Sound:").frame(width: 100, alignment: .topTrailing)
+                Toggle("Play sound when timer elapsed ", isOn: $settings.playSound)
+                    .frame(width: 220, alignment: .leading)
+                
             }
         }.padding()
     }
