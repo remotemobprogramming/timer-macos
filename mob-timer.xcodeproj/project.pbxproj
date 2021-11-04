@@ -32,10 +32,10 @@
 
 /* Begin PBXFileReference section */
 		191D7A2727281828003DC08D /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
-		191D7A2D2729999B003DC08D /* mob-timer-macosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mob-timer-macosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		191D7A2D2729999B003DC08D /* mob-timerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mob-timerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		191D7A36272999C9003DC08D /* MobTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobTimerTests.swift; sourceTree = "<group>"; };
 		197359642725BA7B00D5A6C3 /* MobTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobTimer.swift; sourceTree = "<group>"; };
-		19C76B742725527E003C050C /* mob-timer-macos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mob-timer-macos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		19C76B742725527E003C050C /* mob-timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mob-timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19C76B772725527E003C050C /* MobTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobTimerApp.swift; sourceTree = "<group>"; };
 		19C76B792725527E003C050C /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		19C76B7B27255280003C050C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,12 +66,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		191D7A2E2729999B003DC08D /* mob-timer-macosTests */ = {
+		191D7A2E2729999B003DC08D /* mob-timerTests */ = {
 			isa = PBXGroup;
 			children = (
 				191D7A36272999C9003DC08D /* MobTimerTests.swift */,
 			);
-			path = "mob-timer-macosTests";
+			path = "mob-timerTests";
 			sourceTree = "<group>";
 		};
 		197359672725C39800D5A6C3 /* Frameworks */ = {
@@ -84,8 +84,8 @@
 		19C76B6B2725527D003C050C = {
 			isa = PBXGroup;
 			children = (
-				19C76B762725527E003C050C /* mob-timer-macos */,
-				191D7A2E2729999B003DC08D /* mob-timer-macosTests */,
+				19C76B762725527E003C050C /* mob-timer */,
+				191D7A2E2729999B003DC08D /* mob-timerTests */,
 				19C76B752725527E003C050C /* Products */,
 				197359672725C39800D5A6C3 /* Frameworks */,
 			);
@@ -94,13 +94,13 @@
 		19C76B752725527E003C050C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				19C76B742725527E003C050C /* mob-timer-macos.app */,
-				191D7A2D2729999B003DC08D /* mob-timer-macosTests.xctest */,
+				19C76B742725527E003C050C /* mob-timer.app */,
+				191D7A2D2729999B003DC08D /* mob-timerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		19C76B762725527E003C050C /* mob-timer-macos */ = {
+		19C76B762725527E003C050C /* mob-timer */ = {
 			isa = PBXGroup;
 			children = (
 				19C76B772725527E003C050C /* MobTimerApp.swift */,
@@ -115,7 +115,7 @@
 				19C76B8027255280003C050C /* mob_timer_macos.entitlements */,
 				19C76B8C27255C54003C050C /* Info.plist */,
 			);
-			path = "mob-timer-macos";
+			path = "mob-timer";
 			sourceTree = "<group>";
 		};
 		19C76B7D27255280003C050C /* Preview Content */ = {
@@ -129,9 +129,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		191D7A2C2729999B003DC08D /* mob-timer-macosTests */ = {
+		191D7A2C2729999B003DC08D /* mob-timerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 191D7A332729999B003DC08D /* Build configuration list for PBXNativeTarget "mob-timer-macosTests" */;
+			buildConfigurationList = 191D7A332729999B003DC08D /* Build configuration list for PBXNativeTarget "mob-timerTests" */;
 			buildPhases = (
 				191D7A292729999B003DC08D /* Sources */,
 				191D7A2A2729999B003DC08D /* Frameworks */,
@@ -142,14 +142,14 @@
 			dependencies = (
 				191D7A322729999B003DC08D /* PBXTargetDependency */,
 			);
-			name = "mob-timer-macosTests";
+			name = "mob-timerTests";
 			productName = "mob-timer-macosTests";
-			productReference = 191D7A2D2729999B003DC08D /* mob-timer-macosTests.xctest */;
+			productReference = 191D7A2D2729999B003DC08D /* mob-timerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		19C76B732725527D003C050C /* mob-timer-macos */ = {
+		19C76B732725527D003C050C /* mob-timer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 19C76B8327255280003C050C /* Build configuration list for PBXNativeTarget "mob-timer-macos" */;
+			buildConfigurationList = 19C76B8327255280003C050C /* Build configuration list for PBXNativeTarget "mob-timer" */;
 			buildPhases = (
 				19C76B702725527D003C050C /* Sources */,
 				19C76B712725527D003C050C /* Frameworks */,
@@ -159,12 +159,12 @@
 			);
 			dependencies = (
 			);
-			name = "mob-timer-macos";
+			name = "mob-timer";
 			packageProductDependencies = (
 				197359682725C39800D5A6C3 /* EventSource */,
 			);
 			productName = "mob-timer-macos";
-			productReference = 19C76B742725527E003C050C /* mob-timer-macos.app */;
+			productReference = 19C76B742725527E003C050C /* mob-timer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 19C76B6F2725527D003C050C /* Build configuration list for PBXProject "mob-timer-macos" */;
+			buildConfigurationList = 19C76B6F2725527D003C050C /* Build configuration list for PBXProject "mob-timer" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -202,8 +202,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				19C76B732725527D003C050C /* mob-timer-macos */,
-				191D7A2C2729999B003DC08D /* mob-timer-macosTests */,
+				19C76B732725527D003C050C /* mob-timer */,
+				191D7A2C2729999B003DC08D /* mob-timerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -255,7 +255,7 @@
 /* Begin PBXTargetDependency section */
 		191D7A322729999B003DC08D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 19C76B732725527D003C050C /* mob-timer-macos */;
+			target = 19C76B732725527D003C050C /* mob-timer */;
 			targetProxy = 191D7A312729999B003DC08D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -280,7 +280,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mob-timer-macos.app/Contents/MacOS/mob-timer-macos";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mob-timer.app/Contents/MacOS/mob-timer";
 			};
 			name = Debug;
 		};
@@ -303,7 +303,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mob-timer-macos.app/Contents/MacOS/mob-timer-macos";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mob-timer.app/Contents/MacOS/mob-timer";
 			};
 			name = Release;
 		};
@@ -428,14 +428,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "mob-timer-macos/mob_timer_macos.entitlements";
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mob-timer-macos/Preview Content\"";
+				DEVELOPMENT_TEAM = 5CB849HV5Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mob-timer-macos/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -443,7 +445,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "sh.mob.mob-timer-macos";
+				PRODUCT_BUNDLE_IDENTIFIER = sh.mob.timer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -456,14 +458,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "mob-timer-macos/mob_timer_macos.entitlements";
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mob-timer-macos/Preview Content\"";
+				DEVELOPMENT_TEAM = 5CB849HV5Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mob-timer-macos/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -471,7 +475,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "sh.mob.mob-timer-macos";
+				PRODUCT_BUNDLE_IDENTIFIER = sh.mob.timer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -481,7 +485,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		191D7A332729999B003DC08D /* Build configuration list for PBXNativeTarget "mob-timer-macosTests" */ = {
+		191D7A332729999B003DC08D /* Build configuration list for PBXNativeTarget "mob-timerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				191D7A342729999B003DC08D /* Debug */,
@@ -490,7 +494,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		19C76B6F2725527D003C050C /* Build configuration list for PBXProject "mob-timer-macos" */ = {
+		19C76B6F2725527D003C050C /* Build configuration list for PBXProject "mob-timer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				19C76B8127255280003C050C /* Debug */,
@@ -499,7 +503,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		19C76B8327255280003C050C /* Build configuration list for PBXNativeTarget "mob-timer-macos" */ = {
+		19C76B8327255280003C050C /* Build configuration list for PBXNativeTarget "mob-timer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				19C76B8427255280003C050C /* Debug */,

@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "19C76B732725527D003C050C"
                BuildableName = "mob-timer-macos.app"
-               BlueprintName = "mob-timer-macos"
-               ReferencedContainer = "container:mob-timer-macos.xcodeproj">
+               BlueprintName = "mob-timer"
+               ReferencedContainer = "container:mob-timer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "191D7A2C2729999B003DC08D"
                BuildableName = "mob-timer-macosTests.xctest"
-               BlueprintName = "mob-timer-macosTests"
-               ReferencedContainer = "container:mob-timer-macos.xcodeproj">
+               BlueprintName = "mob-timerTests"
+               ReferencedContainer = "container:mob-timer.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -56,8 +56,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "19C76B732725527D003C050C"
             BuildableName = "mob-timer-macos.app"
-            BlueprintName = "mob-timer-macos"
-            ReferencedContainer = "container:mob-timer-macos.xcodeproj">
+            BlueprintName = "mob-timer"
+            ReferencedContainer = "container:mob-timer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -80,8 +80,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "19C76B732725527D003C050C"
             BuildableName = "mob-timer-macos.app"
-            BlueprintName = "mob-timer-macos"
-            ReferencedContainer = "container:mob-timer-macos.xcodeproj">
+            BlueprintName = "mob-timer"
+            ReferencedContainer = "container:mob-timer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

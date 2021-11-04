@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/jochen/Projects/mob-timer-macos/mob-timer-macos/mob-timer.xcodeproj">
    </FileRef>
 </Workspace>
