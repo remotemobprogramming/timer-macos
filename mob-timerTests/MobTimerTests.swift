@@ -1,5 +1,5 @@
 import XCTest
-@testable import mob_timer_macos
+@testable import Mob_Timer
 
 class MobTimerTests: XCTestCase {
 

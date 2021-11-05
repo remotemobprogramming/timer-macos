@@ -35,12 +35,12 @@
 		191D7A2D2729999B003DC08D /* mob-timerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mob-timerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		191D7A36272999C9003DC08D /* MobTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobTimerTests.swift; sourceTree = "<group>"; };
 		197359642725BA7B00D5A6C3 /* MobTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobTimer.swift; sourceTree = "<group>"; };
-		19C76B742725527E003C050C /* mob-timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mob-timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		19C76B742725527E003C050C /* Mob Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mob Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19C76B772725527E003C050C /* MobTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobTimerApp.swift; sourceTree = "<group>"; };
 		19C76B792725527E003C050C /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		19C76B7B27255280003C050C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19C76B7E27255280003C050C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		19C76B8027255280003C050C /* mob_timer_macos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mob_timer_macos.entitlements; sourceTree = "<group>"; };
+		19C76B8027255280003C050C /* mob_timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mob_timer.entitlements; sourceTree = "<group>"; };
 		19C76B8C27255C54003C050C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		19C76B8D27259DAB003C050C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19C76B902725A80B003C050C /* MobTimerMenuBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobTimerMenuBarItem.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		19C76B752725527E003C050C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				19C76B742725527E003C050C /* mob-timer.app */,
+				19C76B742725527E003C050C /* Mob Timer.app */,
 				191D7A2D2729999B003DC08D /* mob-timerTests.xctest */,
 			);
 			name = Products;
@@ -112,7 +112,7 @@
 				191D7A2727281828003DC08D /* UserSettings.swift */,
 				19C76B7D27255280003C050C /* Preview Content */,
 				19C76B7B27255280003C050C /* Assets.xcassets */,
-				19C76B8027255280003C050C /* mob_timer_macos.entitlements */,
+				19C76B8027255280003C050C /* mob_timer.entitlements */,
 				19C76B8C27255C54003C050C /* Info.plist */,
 			);
 			path = "mob-timer";
@@ -164,7 +164,7 @@
 				197359682725C39800D5A6C3 /* EventSource */,
 			);
 			productName = "mob-timer-macos";
-			productReference = 19C76B742725527E003C050C /* mob-timer.app */;
+			productReference = 19C76B742725527E003C050C /* Mob Timer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -276,11 +276,11 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "sh.mob.mob-timer-macosTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "sh.mob.mob-timerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mob-timer.app/Contents/MacOS/mob-timer";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mob Timer.app/Contents/MacOS/Mob Timer";
 			};
 			name = Debug;
 		};
@@ -299,11 +299,11 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "sh.mob.mob-timer-macosTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "sh.mob.mob-timerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mob-timer.app/Contents/MacOS/mob-timer";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mob Timer.app/Contents/MacOS/Mob Timer";
 			};
 			name = Release;
 		};
@@ -427,16 +427,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "mob-timer-macos/mob_timer_macos.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "mob-timer/mob_timer.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"mob-timer-macos/Preview Content\"";
-				DEVELOPMENT_TEAM = 5CB849HV5Z;
+				DEVELOPMENT_ASSET_PATHS = "mob-timer/Preview\\ Content/Preview\\ Assets.xcassets";
+				DEVELOPMENT_TEAM = CXY8G76CEJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "mob-timer-macos/Info.plist";
+				INFOPLIST_FILE = "mob-timer/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -446,7 +446,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = sh.mob.timer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Mob Timer";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -457,16 +457,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "mob-timer-macos/mob_timer_macos.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "mob-timer/mob_timer.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"mob-timer-macos/Preview Content\"";
-				DEVELOPMENT_TEAM = 5CB849HV5Z;
+				DEVELOPMENT_ASSET_PATHS = "mob-timer/Preview\\ Content/Preview\\ Assets.xcassets";
+				DEVELOPMENT_TEAM = CXY8G76CEJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "mob-timer-macos/Info.plist";
+				INFOPLIST_FILE = "mob-timer/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -476,7 +476,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = sh.mob.timer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Mob Timer";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
