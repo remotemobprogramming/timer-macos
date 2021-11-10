@@ -37,6 +37,12 @@ class MobTimerMenuBarItem: NSObject {
             startTimerItem.action = #selector(Self.startTimer)
             mainMenu.addItem(startTimerItem)
 
+            let openInBrowserItem = NSMenuItem()
+            openInBrowserItem.title = "Open in browser..."
+            openInBrowserItem.target = self
+            openInBrowserItem.action = #selector(Self.openInBrowser)
+            mainMenu.addItem(openInBrowserItem)
+            
             let preferencesItem = NSMenuItem()
             preferencesItem.title = "Preferences..."
             preferencesItem.action = #selector(Self.showPreferences)
@@ -60,9 +66,14 @@ class MobTimerMenuBarItem: NSObject {
 
     @objc private func startTimer() {
         mobTimer.startTimer()
-        
     }
-    
+
+    @objc private func openInBrowser() {
+        if let url = mobTimer.buildRoomUrl() {
+            NSWorkspace.shared.open(url)
+        }
+    }
+
     @objc private func showPreferences() {
         let controller = DetailWindowController(rootView: PreferencesView(settings: settings))
         controller.window?.title = "Mob Timer";

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "19C76B732725527D003C050C"
-               BuildableName = "mob-timer.app"
+               BuildableName = "Mob Timer.app"
                BlueprintName = "mob-timer"
                ReferencedContainer = "container:mob-timer.xcodeproj">
             </BuildableReference>
@@ -55,7 +55,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "19C76B732725527D003C050C"
-            BuildableName = "mob-timer.app"
+            BuildableName = "Mob Timer.app"
             BlueprintName = "mob-timer"
             ReferencedContainer = "container:mob-timer.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "19C76B732725527D003C050C"
-            BuildableName = "mob-timer.app"
+            BuildableName = "Mob Timer.app"
             BlueprintName = "mob-timer"
             ReferencedContainer = "container:mob-timer.xcodeproj">
          </BuildableReference>
