@@ -8,25 +8,25 @@ struct PreferencesView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Server:").frame(width: 100, alignment: .topTrailing)
+                Text("Server:").frame(width: 130, alignment: .topTrailing)
                 TextField("Server", text: $settings.server)
                     .frame(width: 220)
                     .disableAutocorrection(true)
             }
             HStack {
-                Text("Room:").frame(width: 100, alignment: .topTrailing)
+                Text("Room:").frame(width: 130, alignment: .topTrailing)
                 TextField("Room", text: $settings.room)
                     .frame(width: 220)
                     .disableAutocorrection(true)
             }
             HStack {
-                Text("Username:").frame(width: 100, alignment: .topTrailing)
+                Text("Username:").frame(width: 130, alignment: .topTrailing)
                 TextField("Username", text: $settings.username)
                     .frame(width: 220)
                     .disableAutocorrection(true)
             }
             HStack {
-                Text("Interval:").frame(width: 100, alignment: .topTrailing)
+                Text("Interval (Minutes):").frame(width: 130, alignment: .topTrailing)
                 TextField("Interval", text: $settings.interval)
                     .frame(width: 220)
                     .disableAutocorrection(true)
@@ -38,7 +38,7 @@ struct PreferencesView: View {
                     }
             }
             HStack {
-                Text("Sound:").frame(width: 100, alignment: .topTrailing)
+                Text("Sound:").frame(width: 130, alignment: .topTrailing)
                 Toggle("Play sound when timer elapsed ", isOn: $settings.playSound)
                     .frame(width: 220, alignment: .leading)
                 
