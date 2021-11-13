@@ -1,12 +1,16 @@
 import Foundation
 import AppKit
+import os
 
 import EventSource
 
 class MobTimer {
     
+    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "mobtimer")
+    
     var settings: UserSettings
     var eventSource: EventSource?
+    var currentUrl: URL?
     var currentTimer: Timer?
     var isTimerRunning = false
     
@@ -31,21 +35,22 @@ class MobTimer {
         guard let url = buildEventsUrl() else {
             return
         }
-        print("Connecting to \(url)")
+        currentUrl = url
+        log.info("Connecting to \(url)")
         eventSource = EventSource(url: url)
         eventSource?.connect()
         eventSource?.onComplete { [weak self] statusCode, reconnect, error in
-            print("Disconnected", statusCode ?? "no statusCode")
+            self?.log.info("Disconnected")
             let retryTime = self?.eventSource?.retryTime ?? 3000
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(retryTime)) { [weak self] in
-                print("Retrying now... \(String(describing: self?.eventSource?.url))")
+                self?.log.info("Retrying now... \(String(describing: self?.eventSource?.url))")
                 self?.eventSource?.connect()
             }
         }
         eventSource?.addEventListener("TIMER_REQUEST") { _, _, data in
             
             if let data = data {
-                print(data)
+                self.log.info("TIMER_REQUEST: \(data)")
             }
             
             struct TimerRequest: Codable {
@@ -70,12 +75,16 @@ class MobTimer {
         guard (notification.object as? UserDefaults) != nil else {
             return
         }
-        print("User settings have been changed. Reconnecting...")
-        currentTimer?.invalidate()
-        status = ""
-        eventSource?.disconnect()
-        eventSource = nil
-        self.connect()
+        
+        if currentUrl != buildEventsUrl() {
+            log.info("Endpoint has changed. Reconnecting...")
+            currentTimer?.invalidate()
+            self.status = ""
+            eventSource?.disconnect()
+            eventSource = nil
+            self.connect()
+
+        }
     }
     
     func startTimer() {
@@ -91,7 +100,7 @@ class MobTimer {
         let timerRequest = PutTimerRequestBody(timer: Int(self.settings.interval) ?? 10, user: self.settings.username)
         
         guard let jsonData = try? JSONEncoder().encode(timerRequest) else {
-            print("Error: Trying to convert model to JSON data")
+            log.error("Error: Trying to convert model to JSON data")
             return
         }
         
@@ -101,11 +110,11 @@ class MobTimer {
         request.httpBody = jsonData
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
-                print("Error: error calling PUT")
+                self.log.error("Error: error calling PUT")
                 return
             }
             guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-                print("Error: HTTP request failed")
+                self.log.error("Error: HTTP request failed")
                 return
             }
         }.resume()
@@ -121,7 +130,7 @@ class MobTimer {
             let now = Date()
             
             if now >= timeout {
-                print("next")
+                self.log.info("next")
                 if (self.isTimerRunning) {
                     self.timerFinished()
                 }
@@ -151,7 +160,7 @@ class MobTimer {
     func timerFinished() {
         self.isTimerRunning = false
         if (self.settings.playSound) {
-            print("play sound...")
+            log.info("play sound...")
             NSSound(named: NSSound.Name("Hero"))?.play()
         }
     }
